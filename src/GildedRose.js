@@ -12,12 +12,8 @@ var GildedRose = function () {
 GildedRose.updateQuality = function (items) {
   for (var i = 0; i < items.length; i++) {
     var item = items[i];
-    
     item.decreaseSellIn();
-    
-    var strategy = new Strategy(item);
-  	strategy.update();
-  	
+    item.updateQuality();
   }
   return items;
 };

@@ -6,7 +6,11 @@ var Item = function (name, sellIn, quality) {
   this.name = name;  
   this.sellIn = sellIn;
   this.quality = quality;
-
+  
+  this.updateQuality = function() {
+  	qualityUpdater.update();
+  }
+  
   this.decreaseSellIn = function () {
 	this.sellIn = this.hasReachedMinSellIn() ? 0 : this.sellIn - 1;
   };
@@ -42,6 +46,8 @@ var Item = function (name, sellIn, quality) {
   this.hasReachedMinQuality = function () {
     return this.quality === minQuality;
   };
+  
+  var qualityUpdater = new Strategy(this);
 };
 
 var Strategy = function(item) {
