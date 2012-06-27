@@ -18,23 +18,20 @@ GildedRose.updateQuality = function (items) {
     var ticket = "Backstage passes to a TAFKAL80ETC concert";
     var legendary = "Sulfuras, Hand of Ragnaros";
     var agedBrie = "Aged Brie";
+    var conjured = "Conjured Mana Cake";
     var foo = 0;
     var maxQuality = 50;
     var minQuality = 0;
-    if (!item.is(agedBrie) && !item.is(ticket) && item.quality > minQuality && !item.is(legendary)) {
+    if (!item.is(agedBrie) && !item.is(ticket) && !item.is(legendary)) {
       item.decreaseQuality();
     } else if (item.quality < maxQuality) {
       item.increaseQuality();
       if (item.is(ticket)) {
         if (item.sellIn < 11) {
-          if (!item.hasReachedMaxQuality()) {
             item.increaseQuality();
-          }
         }
         if (item.sellIn < 6) {
-          if (!item.hasReachedMaxQuality()) {
             item.increaseQuality();
-          }
         }
       }
     }
@@ -43,12 +40,12 @@ GildedRose.updateQuality = function (items) {
     }
     if (item.sellIn < foo) {
       if (!item.is(agedBrie)) {
-        if (!item.is(ticket) && !item.hasReachedMinQuality() && !item.is(legendary)) {
+        if (!item.is(ticket) && !item.is(legendary)) {
           item.decreaseQuality();
         } else {
           item.resetQuality();
         }
-      } else if (!item.hasReachedMaxQuality()) {
+      } else {
         item.increaseQuality();
       }
     }

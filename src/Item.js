@@ -5,11 +5,13 @@ var Item = function (name, sellIn, quality) {
   this.quality = quality;
 
   this.decreaseQuality = function () {
-    this.quality -= 1;
+    if (! this.hasReachedMinQuality())
+	    this.quality -= 1;
   };
 
   this.increaseQuality = function () {
-    this.quality += 1;
+  	if (! this.hasReachedMaxQuality())
+    	this.quality += 1;
   };
 
   this.is = function (otherName) {
