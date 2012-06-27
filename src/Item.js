@@ -64,8 +64,8 @@ var Strategy = function(item) {
 	else if (item.is(conjured)) this.update = conjuredStrategy;
 	
 	function ticketStrategy() {
-  		var middleSellIn = 6;
-  		var farSellIn = 11;
+  		var middleSellIn = 5;
+  		var farSellIn = 10;
   		
   		item.increaseQuality()
   		if (item.sellIn <= farSellIn) item.increaseQuality()

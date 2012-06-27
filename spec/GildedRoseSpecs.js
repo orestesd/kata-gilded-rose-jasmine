@@ -41,5 +41,27 @@ describe("GildedRose shop manager", function () {
           });
     });
     
+    it("actualiza la calidad y el sellIn de los tickets adecuadamente", function () {
+      var items = [];
+      items.push(new Item("Backstage passes to a TAFKAL80ETC concert", 12, 10));
+      items.push(new Item("Backstage passes to a TAFKAL80ETC concert", 11, 10));
+      items.push(new Item("Backstage passes to a TAFKAL80ETC concert", 10, 10));
+      items.push(new Item("Backstage passes to a TAFKAL80ETC concert", 6, 10));
+      items.push(new Item("Backstage passes to a TAFKAL80ETC concert", 5, 10));
+	  items.push(new Item("Backstage passes to a TAFKAL80ETC concert", 0, 10));
+	  items = GildedRose.updateQuality(items);
+      [
+        {s:11,q:11},
+        {s:10,q:12},
+        {s:9, q:12},
+        {s:5, q:13},
+        {s:4, q:13},
+        {s:0, q:0}
+      ].forEach(function (testCase, idx) {
+            expect(items[idx].sellIn).toBe(testCase.s);
+            expect(items[idx].quality).toBe(testCase.q);
+          });
+    });
+    
   });
 });
