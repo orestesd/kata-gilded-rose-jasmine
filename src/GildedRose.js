@@ -24,7 +24,10 @@ GildedRose.updateQuality = function (items) {
     var minQuality = 0;
     if (!item.is(agedBrie) && !item.is(ticket) && !item.is(legendary)) {
       item.decreaseQuality();
-    } else if (item.quality < maxQuality) {
+      if (item.is(conjured)) {
+		item.decreaseQuality();
+      }
+    } else {
       item.increaseQuality();
       if (item.is(ticket)) {
         if (item.sellIn < 11) {
@@ -42,6 +45,9 @@ GildedRose.updateQuality = function (items) {
       if (!item.is(agedBrie)) {
         if (!item.is(ticket) && !item.is(legendary)) {
           item.decreaseQuality();
+          if (item.is(conjured)) {
+          	item.decreaseQuality();
+          }
         } else {
           item.resetQuality();
         }
