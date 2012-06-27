@@ -30,11 +30,11 @@ describe("GildedRose shop manager", function () {
       items.push(new Item("Conjured Mana Cake", 0, 6));
       items = GildedRose.updateQuality(items);
       [
-        {s:-1, q:18,},
-        {s:-1, q:2, },
-        {s:0,  q:80, },
-        {s:-1, q:0, },
-        {s:-1, q:2,}
+        {s:0, q:18},
+        {s:0, q:2},
+        {s:0, q:80},
+        {s:0, q:0},
+        {s:0, q:2}
       ].forEach(function (testCase, idx) {
             expect(items[idx].quality).toBe(testCase.q);
             expect(items[idx].sellIn).toBe(testCase.s);

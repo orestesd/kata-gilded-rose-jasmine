@@ -10,52 +10,14 @@ var GildedRose = function () {
   GildedRose.updateQuality(items);
 };
 GildedRose.updateQuality = function (items) {
-  // Iterar items
-  //   -Actualizar quality
-  //   -Actualizar sellIn
   for (var i = 0; i < items.length; i++) {
     var item = items[i];
-    var ticket = "Backstage passes to a TAFKAL80ETC concert";
-    var legendary = "Sulfuras, Hand of Ragnaros";
-    var agedBrie = "Aged Brie";
-    var conjured = "Conjured Mana Cake";
-    var minSellIn = 0;
-  	var middleSellIn = 6;
-  	var farSellIn = 11;
-  
-    if (!item.is(agedBrie) && !item.is(ticket) && !item.is(legendary)) {
-      item.decreaseQuality();
-      if (item.is(conjured)) {
-		item.decreaseQuality();
-      }
-    } else {
-      item.increaseQuality();
-      if (item.is(ticket)) {
-        if (item.sellIn < farSellIn) {
-            item.increaseQuality();
-        }
-        if (item.sellIn < middleSellIn) {
-            item.increaseQuality();
-        }
-      }
-    }
-    if (!item.is(legendary)) {
-      item.sellIn = item.sellIn - 1;
-    }
-    if (item.sellIn < minSellIn) {
-      if (!item.is(agedBrie)) {
-        if (!item.is(ticket) && !item.is(legendary)) {
-          item.decreaseQuality();
-          if (item.is(conjured)) {
-          	item.decreaseQuality();
-          }
-        } else {
-          item.resetQuality();
-        }
-      } else {
-        item.increaseQuality();
-      }
-    }
+    
+    item.decreaseSellIn();
+    
+    var strategy = new Strategy(item);
+  	strategy.update();
+  	
   }
   return items;
 };
