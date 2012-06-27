@@ -57,18 +57,22 @@ var Strategy = function(item) {
     var conjured = "Conjured Mana Cake";
     
   	this.item = item;
-  	this.update = function(){
+  	this.update = defaultStrategy;
+	
+	this.update = createStrategy(item);
+	
+	function createStrategy(item) {
+		if (item.is(ticket)) return ticketStrategy;
+		else if (item.is(legendary)) return legendaryStrategy;
+		else if (item.is(aged)) return agedStrategy;
+		else if (item.is(conjured)) return conjuredStrategy;
+		else return defaultStrategy;
+	}
+	function defaultStrategy() {
   		item.decreaseQuality()
   		if (item.hasReachedMinSellIn()) 
 			item.decreaseQuality();
-  	};
-	
-	
-	if (item.is(ticket)) this.update = ticketStrategy;
-	else if (item.is(legendary)) this.update = legendaryStrategy;
-	else if (item.is(aged)) this.update = agedStrategy;
-	else if (item.is(conjured)) this.update = conjuredStrategy;
-	
+	}
 	function ticketStrategy() {
   		var middleSellIn = 5;
   		var farSellIn = 10;
