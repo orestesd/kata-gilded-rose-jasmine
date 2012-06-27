@@ -19,9 +19,10 @@ GildedRose.updateQuality = function (items) {
     var legendary = "Sulfuras, Hand of Ragnaros";
     var agedBrie = "Aged Brie";
     var conjured = "Conjured Mana Cake";
-    var foo = 0;
-    var maxQuality = 50;
-    var minQuality = 0;
+    var minSellIn = 0;
+  	var middleSellIn = 6;
+  	var farSellIn = 11;
+  
     if (!item.is(agedBrie) && !item.is(ticket) && !item.is(legendary)) {
       item.decreaseQuality();
       if (item.is(conjured)) {
@@ -30,10 +31,10 @@ GildedRose.updateQuality = function (items) {
     } else {
       item.increaseQuality();
       if (item.is(ticket)) {
-        if (item.sellIn < 11) {
+        if (item.sellIn < farSellIn) {
             item.increaseQuality();
         }
-        if (item.sellIn < 6) {
+        if (item.sellIn < middleSellIn) {
             item.increaseQuality();
         }
       }
@@ -41,7 +42,7 @@ GildedRose.updateQuality = function (items) {
     if (!item.is(legendary)) {
       item.sellIn = item.sellIn - 1;
     }
-    if (item.sellIn < foo) {
+    if (item.sellIn < minSellIn) {
       if (!item.is(agedBrie)) {
         if (!item.is(ticket) && !item.is(legendary)) {
           item.decreaseQuality();
